@@ -1,0 +1,55 @@
+section .text
+    global _start
+
+_start:
+    mov eax, [num1]
+    mov ebx, [num2]
+    cmp eax, ebx
+    jl set_ebx
+    jmp skip1
+
+set_ebx:
+    mov eax, ebx
+
+skip1:
+    mov ebx, [num3]
+    cmp eax, ebx
+    jl set_ebx2
+    jmp skip2
+
+set_ebx2:
+    mov eax, ebx
+
+skip2:
+    mov ebx, [num4]
+    cmp eax, ebx
+    jl set_ebx3
+    jmp skip3
+
+set_ebx3:
+    mov eax, ebx
+
+skip3:
+    mov ebx, [num5]
+    cmp eax, ebx
+    jl set_ebx4
+    jmp done
+
+set_ebx4:
+    mov eax, ebx
+
+done:
+    mov [largest], eax
+
+    mov eax, 1
+    int 0x80
+
+section .data
+    num1 dd 23
+    num2 dd 45
+    num3 dd 17
+    num4 dd 98
+    num5 dd 56
+
+section .bss
+    largest resd 1
